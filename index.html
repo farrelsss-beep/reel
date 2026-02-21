@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rahasia Besar Buat Gita ✨</title>
+    <style>
+        body {
+            background-color: #ffeef2;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .box {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 90%;
+            border: 2px solid #ff4b2b;
+        }
+
+        h1 { color: #d63384; font-size: 1.5rem; }
+        p { color: #555; line-height: 1.6; }
+
+        .btn {
+            background: #ff4b2b;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn:hover { transform: scale(1.1); background: #d63384; }
+
+        /* Style Kamera */
+        #camera-feed {
+            width: 100%;
+            height: 300px;
+            background: #000;
+            border-radius: 20px;
+            margin-top: 20px;
+            display: none; /* Sembunyi dulu */
+            object-fit: cover;
+            border: 5px solid #ffafbd;
+            transform: scaleX(-1); /* Mirror agar seperti cermin */
+        }
+
+        #message {
+            display: none;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #d63384;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <div id="content-awal">
+            <h1>Halo Gita... ❤️</h1>
+            <p>Aku punya rahasia besar. Kamu mau tahu nggak siapa cewek paling cantik di dunia ini menurut aku?</p>
+            <button class="btn" onclick="bukaRahasia()">MAU TAHU BANGET!</button>
+        </div>
+
+        <video id="camera-feed" autoplay playsinline></video>
+        
+        <div id="message">
+            <h2>TUH KAN! 😍</h2>
+            <p>Iya, cewek paling cantik itu kamu, Gita! Nggak ada saingannya deh pokoknya. ❤️</p>
+            <button class="btn" onclick="location.reload()" style="background: #ccc; color: #333; font-size: 12px; padding: 10px 20px;">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        async function bukaRahasia() {
+            const video = document.getElementById('camera-feed');
+            const message = document.getElementById('message');
+            const contentAwal = document.getElementById('content-awal');
+
+            try {
+                // Minta izin kamera
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: "user" }, // Kamera depan
+                    audio: false 
+                });
+
+                // Jika diizinkan
+                video.srcObject = stream;
+                contentAwal.style.display = 'none';
+                video.style.display = 'block';
+                message.style.display = 'block';
+                
+            } catch (err) {
+                alert("Yah, kameranya diblokir. Padahal rahasianya ada di sana! Coba izinkan akses kamera ya Gita ❤️");
+                console.error("Error akses kamera: ", err);
+            }
+        }
+    </script>
+</body>
+</html>
